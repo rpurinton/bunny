@@ -34,27 +34,12 @@
         "react/event-loop": "^1.0 || ^0.5 || ^0.4",
         "react/promise": "^3.0 || ^2.2"
     },
-    "require-dev": {
-        "ext-pcntl": "*",
-        "phpunit/phpunit": "^9.5 || ^7.5.20",
-        "symfony/process": "^6.1 || ^4.4",
-        "phpstan/phpstan": "^1.10"
-    },
     "suggest": {
         "ext-pcntl": "For using synchronous AMQP/RabbitMQ client"
     },
     "autoload": {
         "psr-4": {
             "RPurinton\\Bunny\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "files": [
-            "test/Library/functions.php"
-        ],
-        "psr-4": {
-            "RPurinton\\Bunny\\": "test/Bunny/",
-            "RPurinton\\Bunny\\Test\\Library\\": "test/Library/"
         }
     }
 }
