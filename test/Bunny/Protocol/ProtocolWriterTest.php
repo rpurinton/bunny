@@ -1,7 +1,7 @@
 <?php
-namespace Bunny\Protocol;
+namespace RPurinton\Bunny\Protocol;
 
-use Bunny\Constants;
+use RPurinton\Bunny\Constants;
 use DateTime;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;

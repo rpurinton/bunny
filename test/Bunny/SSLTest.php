@@ -1,13 +1,13 @@
 <?php
 
-namespace Bunny;
+namespace RPurinton\Bunny;
 
-use Bunny\Async\Client as AsyncClient;
-use Bunny\Exception\ClientException;
-use Bunny\Test\Exception\TimeoutException;
-use Bunny\Test\Library\AsynchronousClientHelper;
-use Bunny\Test\Library\Environment;
-use Bunny\Test\Library\SynchronousClientHelper;
+use RPurinton\Bunny\Async\Client as AsyncClient;
+use RPurinton\Bunny\Exception\ClientException;
+use RPurinton\Bunny\Test\Exception\TimeoutException;
+use RPurinton\Bunny\Test\Library\AsynchronousClientHelper;
+use RPurinton\Bunny\Test\Library\Environment;
+use RPurinton\Bunny\Test\Library\SynchronousClientHelper;
 use PHPUnit\Framework\TestCase;
 
 use React\EventLoop\Factory;

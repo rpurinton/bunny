@@ -4,13 +4,13 @@
 
 declare(strict_types=1);
 
-namespace Bunny;
+namespace RPurinton\Bunny;
 
-use Bunny\Async\Client;
-use Bunny\Exception\ClientException;
-use Bunny\Protocol\MethodBasicReturnFrame;
-use Bunny\Test\Exception\TimeoutException;
-use Bunny\Test\Library\AsynchronousClientHelper;
+use RPurinton\Bunny\Async\Client;
+use RPurinton\Bunny\Exception\ClientException;
+use RPurinton\Bunny\Protocol\MethodBasicReturnFrame;
+use RPurinton\Bunny\Test\Exception\TimeoutException;
+use RPurinton\Bunny\Test\Library\AsynchronousClientHelper;
 use PHPUnit\Framework\TestCase;
 use React\EventLoop\Factory;
 use React\Promise;

@@ -1,5 +1,5 @@
 {
-    "name": "discommand2/bunny",
+    "name": "rpurinton/bunny",
     "type": "library",
     "description": "Performant pure-PHP AMQP (RabbitMQ) sync/async (ReactPHP) library",
     "keywords": [
@@ -17,6 +17,7 @@
         "reactphp"
     ],
     "minimum-stability": "stable",
+    "version": "1.0.0",
     "license": "MIT",
     "authors": [
         {
@@ -44,7 +45,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Bunny\\": "src/Bunny/"
+            "RPurinton\\Bunny\\": "src/"
         }
     },
     "autoload-dev": {
@@ -52,8 +53,8 @@
             "test/Library/functions.php"
         ],
         "psr-4": {
-            "Bunny\\": "test/Bunny/",
-            "Bunny\\Test\\Library\\": "test/Library/"
+            "RPurinton\\Bunny\\": "test/Bunny/",
+            "RPurinton\\Bunny\\Test\\Library\\": "test/Library/"
         }
     }
 }

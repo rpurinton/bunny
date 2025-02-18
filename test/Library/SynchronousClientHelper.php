@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Bunny\Test\Library;
+namespace RPurinton\Bunny\Test\Library;
 
-use Bunny\Client;
+use RPurinton\Bunny\Client;
 use React\Promise\Promise;
 
 final class SynchronousClientHelper extends AbstractClientHelper

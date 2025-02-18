@@ -1,5 +1,5 @@
 <?php
-namespace Bunny\Test\Exception;
+namespace RPurinton\Bunny\Test\Exception;
 
 class TimeoutException extends \RuntimeException
 {

@@ -4,9 +4,9 @@
 
 declare(strict_types=1);
 
-namespace Bunny;
+namespace RPurinton\Bunny;
 
-use Bunny\Test\Library\SynchronousClientHelper;
+use RPurinton\Bunny\Test\Library\SynchronousClientHelper;
 use PHPUnit\Framework\TestCase;
 
 class ChannelTest extends TestCase

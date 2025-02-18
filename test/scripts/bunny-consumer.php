@@ -5,11 +5,11 @@
 
 declare(strict_types=1);
 
-namespace Bunny\Test\App;
+namespace RPurinton\Bunny\Test\App;
 
-use Bunny\Channel;
-use Bunny\Client;
-use Bunny\Message;
+use RPurinton\Bunny\Channel;
+use RPurinton\Bunny\Client;
+use RPurinton\Bunny\Message;
 
 use function Bunny\Test\Library\parseAmqpUri;
 

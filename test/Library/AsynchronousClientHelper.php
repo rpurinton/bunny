@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Bunny\Test\Library;
+namespace RPurinton\Bunny\Test\Library;
 
-use Bunny\Async\Client;
+use RPurinton\Bunny\Async\Client;
 use React\EventLoop\LoopInterface;
 
 final class AsynchronousClientHelper extends AbstractClientHelper

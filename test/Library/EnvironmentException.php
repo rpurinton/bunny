@@ -1,6 +1,6 @@
 <?php
 
-namespace Bunny\Test\Library;
+namespace RPurinton\Bunny\Test\Library;
 
 class EnvironmentException extends \RuntimeException
 {
