@@ -57,6 +57,6 @@ function consume(Channel $channel): void
                 exit(1);
             }
         },
-        "bunnytest"
+        "bunnytest" // Queue name
     );
 }
