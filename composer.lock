@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1873bb5f0b491e7faa3602ce11d7581",
+    "content-hash": "e4db3076b22854339d36e13e039a926c",
     "packages": [
         {
             "name": "react/event-loop",
@@ -153,16 +153,16 @@
         },
         {
             "name": "rpurinton/config",
-            "version": "1.0.11",
+            "version": "1.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rpurinton/config.git",
-                "reference": "53a51664c27b2d3e0f48e87725918363b2047ed2"
+                "reference": "163ba765589799486a9d5bee50eccb768b40371c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rpurinton/config/zipball/53a51664c27b2d3e0f48e87725918363b2047ed2",
-                "reference": "53a51664c27b2d3e0f48e87725918363b2047ed2",
+                "url": "https://api.github.com/repos/rpurinton/config/zipball/163ba765589799486a9d5bee50eccb768b40371c",
+                "reference": "163ba765589799486a9d5bee50eccb768b40371c",
                 "shasum": ""
             },
             "require": {
@@ -188,9 +188,9 @@
             "description": "A basic configuration loading utility.",
             "support": {
                 "issues": "https://github.com/rpurinton/config/issues",
-                "source": "https://github.com/rpurinton/config/tree/1.0.11"
+                "source": "https://github.com/rpurinton/config/tree/1.0.15"
             },
-            "time": "2025-02-20T20:50:02+00:00"
+            "time": "2025-02-20T22:42:26+00:00"
         }
     ],
     "packages-dev": [],
