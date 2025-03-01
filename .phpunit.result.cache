@@ -1,0 +1,1 @@
+{"version":1,"defects":{"RPurinton\\Bunny\\AsyncClientTest::testConnect":4,"RPurinton\\Bunny\\AsyncClientTest::testConnectFailure":3},"times":{"RPurinton\\Bunny\\AsyncClientTest::testConnect":0.006,"RPurinton\\Bunny\\AsyncClientTest::testConnectFailure":5.007}}
