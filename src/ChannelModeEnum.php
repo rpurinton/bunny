@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny;
 
 /**
@@ -23,7 +24,4 @@ final class ChannelModeEnum
      * Broker sends asynchronously 'basic.ack's for delivered messages.
      */
     const CONFIRM = 3;
-
-
-
 }

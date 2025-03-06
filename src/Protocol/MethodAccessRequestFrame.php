@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny\Protocol;
 
 use RPurinton\Bunny\Constants;
@@ -35,5 +36,4 @@ class MethodAccessRequestFrame extends MethodFrame
     {
         parent::__construct(Constants::CLASS_ACCESS, Constants::METHOD_ACCESS_REQUEST);
     }
-
 }

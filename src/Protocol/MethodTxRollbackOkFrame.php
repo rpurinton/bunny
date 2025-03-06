@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny\Protocol;
 
 use RPurinton\Bunny\Constants;
@@ -17,5 +18,4 @@ class MethodTxRollbackOkFrame extends MethodFrame
     {
         parent::__construct(Constants::CLASS_TX, Constants::METHOD_TX_ROLLBACK_OK);
     }
-
 }

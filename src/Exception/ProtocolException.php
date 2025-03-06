@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny\Exception;
 
 /**
@@ -6,6 +7,4 @@ namespace RPurinton\Bunny\Exception;
  *
  * @author Jakub Kulhan <jakub.kulhan@gmail.com>
  */
-class ProtocolException extends BunnyException
-{
-}
+class ProtocolException extends BunnyException {}

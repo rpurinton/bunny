@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny\Protocol;
 
 use RPurinton\Bunny\Constants;
@@ -338,5 +339,4 @@ trait ProtocolReaderGenerated
 
         return $frame;
     }
-
 }

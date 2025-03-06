@@ -118,7 +118,6 @@ class Client extends AbstractClient
             $this->state = ClientStateEnum::CONNECTED;
 
             return $this;
-
         } catch (\Exception $e) {
             $this->state = ClientStateEnum::ERROR;
             throw $e;
@@ -185,7 +184,6 @@ class Client extends AbstractClient
         do {
             if (!empty($this->queue)) {
                 $frame = array_shift($this->queue);
-
             } else {
                 if (($frame = $this->reader->consumeFrame($this->readBuffer)) === null) {
                     $now = microtime(true);
@@ -208,14 +206,14 @@ class Client extends AbstractClient
 
                         // Note: The word "Unable" within the stream_select error message was spelled "unable" in PHP
                         //       versions < 8.
-                        if ($lastError !== null &&
+                        if (
+                            $lastError !== null &&
                             preg_match("/^stream_select\\(\\): [Uu]nable to select \\[(\\d+)\\]:/", $lastError["message"], $m) &&
                             intval($m[1]) === PCNTL_EINTR
                         ) {
                             // got interrupted by signal, dispatch signals & continue
                             pcntl_signal_dispatch();
                             $n = 0;
-
                         } else {
                             throw new ClientException(sprintf(
                                 "stream_select() failed: %s",
@@ -252,7 +250,6 @@ class Client extends AbstractClient
 
             if ($frame->channel === 0) {
                 $this->onFrameReceived($frame);
-
             } else {
                 if (!isset($this->channels[$frame->channel])) {
                     throw new ClientException(
@@ -262,8 +259,6 @@ class Client extends AbstractClient
 
                 $this->channels[$frame->channel]->onFrameReceived($frame);
             }
-
-
         } while ($this->running);
     }
 
@@ -274,5 +269,4 @@ class Client extends AbstractClient
     {
         $this->running = false;
     }
-
 }

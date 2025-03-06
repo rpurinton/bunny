@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny\Protocol;
 
 use RPurinton\Bunny\Constants;
@@ -17,5 +18,4 @@ class MethodConfirmSelectOkFrame extends MethodFrame
     {
         parent::__construct(Constants::CLASS_CONFIRM, Constants::METHOD_CONFIRM_SELECT_OK);
     }
-
 }

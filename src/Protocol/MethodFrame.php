@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny\Protocol;
 
 use RPurinton\Bunny\Constants;
@@ -33,5 +34,4 @@ class MethodFrame extends AbstractFrame
         $this->classId = $classId;
         $this->methodId = $methodId;
     }
-
 }

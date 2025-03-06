@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny\Exception;
 
 /**
@@ -13,5 +14,4 @@ class FrameEndInvalidException extends ProtocolException
     {
         parent::__construct("AbstractFrame end byte is invalid.");
     }
-
 }

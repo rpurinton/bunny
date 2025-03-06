@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny;
 
 use RPurinton\Bunny\Exception\ClientException;
@@ -130,7 +131,7 @@ abstract class AbstractClient
 
         if (!isset($options["heartbeat"])) {
             $options["heartbeat"] = 60.0;
-        } elseif ($options["heartbeat"] >= 2**15) {
+        } elseif ($options["heartbeat"] >= 2 ** 15) {
             throw new InvalidArgumentException("Heartbeat too high: the value is a signed int16.");
         }
 
@@ -233,7 +234,7 @@ abstract class AbstractClient
             }
 
             // see https://github.com/nrk/predis/blob/v1.0/src/Connection/StreamConnection.php
-            $uri = $streamScheme."://{$this->options["host"]}:{$this->options["port"]}";
+            $uri = $streamScheme . "://{$this->options["host"]}:{$this->options["port"]}";
             $flags = STREAM_CLIENT_CONNECT;
 
             if (isset($this->options["async_connect"]) && !!$this->options["async_connect"]) {
@@ -251,11 +252,13 @@ abstract class AbstractClient
             }
 
             stream_context_set_options(
-                $context, [
-                "socket" => [
-                    "tcp_nodelay" => true
+                $context,
+                [
+                    "socket" => [
+                        "tcp_nodelay" => true
+                    ]
                 ]
-            ]);
+            );
 
             $this->stream = @stream_socket_client($uri, $errno, $errstr, (float)$this->options["timeout"], $flags, $context);
 
@@ -328,20 +331,23 @@ abstract class AbstractClient
      */
     protected function write()
     {
-        if (($written = @fwrite($this->getStream(), $this->writeBuffer->read($this->writeBuffer->getLength()))) === false) {
-            throw new ClientException("Could not write data to socket.");
+        try {
+            if (($written = @fwrite($this->getStream(), $this->writeBuffer->read($this->writeBuffer->getLength()))) === false) {
+                throw new ClientException("Could not write data to socket.");
+            }
+
+            if ($written === 0) {
+                throw new ClientException("Broken pipe or closed connection.");
+            }
+
+            fflush($this->getStream()); // flush internal PHP buffers
+
+            $this->writeBuffer->discard($written);
+            $this->lastWrite = microtime(true);
+        } catch (\Exception $e) {
+            // Log the error or handle it as needed
         }
-
-        if ($written === 0) {
-            throw new ClientException("Broken pipe or closed connection.");
-        }
-
-        fflush($this->getStream()); // flush internal PHP buffers
-
-        $this->writeBuffer->discard($written);
-        $this->lastWrite = microtime(true);
     }
-
     /**
      * Responds to authentication challenge
      *
@@ -412,19 +418,17 @@ abstract class AbstractClient
 
         if ($response instanceof MethodChannelOpenOkFrame) {
             return $this->channels[$channelId];
-
         } elseif ($response instanceof Promise\PromiseInterface) {
             return $response->then(function () use ($channelId) {
                 return $this->channels[$channelId];
             });
-
         } else {
             $this->state = ClientStateEnum::ERROR;
 
             throw new ClientException(
                 "channel.open unexpected response of type " . gettype($response) .
-                (is_object($response) ? "(" . get_class($response) . ")" : "") .
-                "."
+                    (is_object($response) ? "(" . get_class($response) . ")" : "") .
+                    "."
             );
         }
     }
@@ -454,16 +458,12 @@ abstract class AbstractClient
             } else {
                 throw new ClientException("Unhandled method frame " . get_class($frame) . ".");
             }
-
         } elseif ($frame instanceof ContentHeaderFrame) {
             $this->disconnect(Constants::STATUS_UNEXPECTED_FRAME, "Got header frame on connection channel (#0).");
-
         } elseif ($frame instanceof ContentBodyFrame) {
             $this->disconnect(Constants::STATUS_UNEXPECTED_FRAME, "Got body frame on connection channel (#0).");
-
         } elseif ($frame instanceof HeartbeatFrame) {
             $this->lastRead = microtime(true);
-
         } else {
             throw new ClientException("Unhandled frame " . get_class($frame) . ".");
         }
@@ -519,5 +519,4 @@ abstract class AbstractClient
 
         throw new ClientException("No available channels");
     }
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny\Protocol;
 
 use RPurinton\Bunny\Constants;
@@ -21,5 +22,4 @@ class MethodConnectionSecureFrame extends MethodFrame
         parent::__construct(Constants::CLASS_CONNECTION, Constants::METHOD_CONNECTION_SECURE);
         $this->channel = Constants::CONNECTION_CHANNEL;
     }
-
 }

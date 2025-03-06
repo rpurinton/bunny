@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny;
 
 use RPurinton\Bunny\Exception\ClientException;
@@ -214,9 +215,12 @@ trait ClientMethods
         $buffer->appendUint16(10);
         $buffer->appendUint16(11);
         $this->getWriter()->appendTable($clientProperties, $buffer);
-        $buffer->appendUint8(strlen($mechanism)); $buffer->append($mechanism);
-        $buffer->appendUint32(strlen($response)); $buffer->append($response);
-        $buffer->appendUint8(strlen($locale)); $buffer->append($locale);
+        $buffer->appendUint8(strlen($mechanism));
+        $buffer->append($mechanism);
+        $buffer->appendUint32(strlen($response));
+        $buffer->append($response);
+        $buffer->appendUint8(strlen($locale));
+        $buffer->append($locale);
         $frame = new Protocol\MethodFrame(10, 11);
         $frame->channel = 0;
         $frame->payloadSize = $buffer->getLength();
@@ -271,7 +275,8 @@ trait ClientMethods
         $buffer->appendUint32(8 + strlen($response));
         $buffer->appendUint16(10);
         $buffer->appendUint16(21);
-        $buffer->appendUint32(strlen($response)); $buffer->append($response);
+        $buffer->appendUint32(strlen($response));
+        $buffer->append($response);
         $buffer->appendUint8(206);
         return $this->flushWriteBuffer();
     }
@@ -337,8 +342,10 @@ trait ClientMethods
         $buffer->appendUint32(7 + strlen($virtualHost) + strlen($capabilities));
         $buffer->appendUint16(10);
         $buffer->appendUint16(40);
-        $buffer->appendUint8(strlen($virtualHost)); $buffer->append($virtualHost);
-        $buffer->appendUint8(strlen($capabilities)); $buffer->append($capabilities);
+        $buffer->appendUint8(strlen($virtualHost));
+        $buffer->append($virtualHost);
+        $buffer->appendUint8(strlen($capabilities));
+        $buffer->append($capabilities);
         $this->getWriter()->appendBits([$insist], $buffer);
         $buffer->appendUint8(206);
         $this->flushWriteBuffer();
@@ -392,7 +399,8 @@ trait ClientMethods
         $buffer->appendUint16(10);
         $buffer->appendUint16(50);
         $buffer->appendInt16($replyCode);
-        $buffer->appendUint8(strlen($replyText)); $buffer->append($replyText);
+        $buffer->appendUint8(strlen($replyText));
+        $buffer->append($replyText);
         $buffer->appendInt16($closeClassId);
         $buffer->appendInt16($closeMethodId);
         $buffer->appendUint8(206);
@@ -572,7 +580,8 @@ trait ClientMethods
         $buffer->appendUint32(5 + strlen($outOfBand));
         $buffer->appendUint16(20);
         $buffer->appendUint16(10);
-        $buffer->appendUint8(strlen($outOfBand)); $buffer->append($outOfBand);
+        $buffer->appendUint8(strlen($outOfBand));
+        $buffer->append($outOfBand);
         $buffer->appendUint8(206);
         $this->flushWriteBuffer();
         return $this->awaitChannelOpenOk($channel);
@@ -758,7 +767,8 @@ trait ClientMethods
         $buffer->appendUint16(20);
         $buffer->appendUint16(40);
         $buffer->appendInt16($replyCode);
-        $buffer->appendUint8(strlen($replyText)); $buffer->append($replyText);
+        $buffer->appendUint8(strlen($replyText));
+        $buffer->append($replyText);
         $buffer->appendInt16($closeClassId);
         $buffer->appendInt16($closeMethodId);
         $buffer->appendUint8(206);
@@ -881,7 +891,8 @@ trait ClientMethods
         $buffer->appendUint32(6 + strlen($realm));
         $buffer->appendUint16(30);
         $buffer->appendUint16(10);
-        $buffer->appendUint8(strlen($realm)); $buffer->append($realm);
+        $buffer->appendUint8(strlen($realm));
+        $buffer->append($realm);
         $this->getWriter()->appendBits([$exclusive, $passive, $active, $write, $read], $buffer);
         $buffer->appendUint8(206);
         $this->flushWriteBuffer();
@@ -942,8 +953,10 @@ trait ClientMethods
         $buffer->appendUint16(40);
         $buffer->appendUint16(10);
         $buffer->appendInt16(0);
-        $buffer->appendUint8(strlen($exchange)); $buffer->append($exchange);
-        $buffer->appendUint8(strlen($exchangeType)); $buffer->append($exchangeType);
+        $buffer->appendUint8(strlen($exchange));
+        $buffer->append($exchange);
+        $buffer->appendUint8(strlen($exchangeType));
+        $buffer->append($exchangeType);
         $this->getWriter()->appendBits([$passive, $durable, $autoDelete, $internal, $nowait], $buffer);
         $this->getWriter()->appendTable($arguments, $buffer);
         $frame = new Protocol\MethodFrame(40, 10);
@@ -1016,7 +1029,8 @@ trait ClientMethods
         $buffer->appendUint16(40);
         $buffer->appendUint16(20);
         $buffer->appendInt16(0);
-        $buffer->appendUint8(strlen($exchange)); $buffer->append($exchange);
+        $buffer->appendUint8(strlen($exchange));
+        $buffer->append($exchange);
         $this->getWriter()->appendBits([$ifUnused, $nowait], $buffer);
         $buffer->appendUint8(206);
         if ($nowait) {
@@ -1081,9 +1095,12 @@ trait ClientMethods
         $buffer->appendUint16(40);
         $buffer->appendUint16(30);
         $buffer->appendInt16(0);
-        $buffer->appendUint8(strlen($destination)); $buffer->append($destination);
-        $buffer->appendUint8(strlen($source)); $buffer->append($source);
-        $buffer->appendUint8(strlen($routingKey)); $buffer->append($routingKey);
+        $buffer->appendUint8(strlen($destination));
+        $buffer->append($destination);
+        $buffer->appendUint8(strlen($source));
+        $buffer->append($source);
+        $buffer->appendUint8(strlen($routingKey));
+        $buffer->append($routingKey);
         $this->getWriter()->appendBits([$nowait], $buffer);
         $this->getWriter()->appendTable($arguments, $buffer);
         $frame = new Protocol\MethodFrame(40, 30);
@@ -1153,9 +1170,12 @@ trait ClientMethods
         $buffer->appendUint16(40);
         $buffer->appendUint16(40);
         $buffer->appendInt16(0);
-        $buffer->appendUint8(strlen($destination)); $buffer->append($destination);
-        $buffer->appendUint8(strlen($source)); $buffer->append($source);
-        $buffer->appendUint8(strlen($routingKey)); $buffer->append($routingKey);
+        $buffer->appendUint8(strlen($destination));
+        $buffer->append($destination);
+        $buffer->appendUint8(strlen($source));
+        $buffer->append($source);
+        $buffer->appendUint8(strlen($routingKey));
+        $buffer->append($routingKey);
         $this->getWriter()->appendBits([$nowait], $buffer);
         $this->getWriter()->appendTable($arguments, $buffer);
         $frame = new Protocol\MethodFrame(40, 40);
@@ -1225,7 +1245,8 @@ trait ClientMethods
         $buffer->appendUint16(50);
         $buffer->appendUint16(10);
         $buffer->appendInt16(0);
-        $buffer->appendUint8(strlen($queue)); $buffer->append($queue);
+        $buffer->appendUint8(strlen($queue));
+        $buffer->append($queue);
         $this->getWriter()->appendBits([$passive, $durable, $exclusive, $autoDelete, $nowait], $buffer);
         $this->getWriter()->appendTable($arguments, $buffer);
         $frame = new Protocol\MethodFrame(50, 10);
@@ -1295,9 +1316,12 @@ trait ClientMethods
         $buffer->appendUint16(50);
         $buffer->appendUint16(20);
         $buffer->appendInt16(0);
-        $buffer->appendUint8(strlen($queue)); $buffer->append($queue);
-        $buffer->appendUint8(strlen($exchange)); $buffer->append($exchange);
-        $buffer->appendUint8(strlen($routingKey)); $buffer->append($routingKey);
+        $buffer->appendUint8(strlen($queue));
+        $buffer->append($queue);
+        $buffer->appendUint8(strlen($exchange));
+        $buffer->append($exchange);
+        $buffer->appendUint8(strlen($routingKey));
+        $buffer->append($routingKey);
         $this->getWriter()->appendBits([$nowait], $buffer);
         $this->getWriter()->appendTable($arguments, $buffer);
         $frame = new Protocol\MethodFrame(50, 20);
@@ -1370,7 +1394,8 @@ trait ClientMethods
         $buffer->appendUint16(50);
         $buffer->appendUint16(30);
         $buffer->appendInt16(0);
-        $buffer->appendUint8(strlen($queue)); $buffer->append($queue);
+        $buffer->appendUint8(strlen($queue));
+        $buffer->append($queue);
         $this->getWriter()->appendBits([$nowait], $buffer);
         $buffer->appendUint8(206);
         if ($nowait) {
@@ -1438,7 +1463,8 @@ trait ClientMethods
         $buffer->appendUint16(50);
         $buffer->appendUint16(40);
         $buffer->appendInt16(0);
-        $buffer->appendUint8(strlen($queue)); $buffer->append($queue);
+        $buffer->appendUint8(strlen($queue));
+        $buffer->append($queue);
         $this->getWriter()->appendBits([$ifUnused, $ifEmpty, $nowait], $buffer);
         $buffer->appendUint8(206);
         if ($nowait) {
@@ -1503,9 +1529,12 @@ trait ClientMethods
         $buffer->appendUint16(50);
         $buffer->appendUint16(50);
         $buffer->appendInt16(0);
-        $buffer->appendUint8(strlen($queue)); $buffer->append($queue);
-        $buffer->appendUint8(strlen($exchange)); $buffer->append($exchange);
-        $buffer->appendUint8(strlen($routingKey)); $buffer->append($routingKey);
+        $buffer->appendUint8(strlen($queue));
+        $buffer->append($queue);
+        $buffer->appendUint8(strlen($exchange));
+        $buffer->append($exchange);
+        $buffer->appendUint8(strlen($routingKey));
+        $buffer->append($routingKey);
         $this->getWriter()->appendTable($arguments, $buffer);
         $frame = new Protocol\MethodFrame(50, 50);
         $frame->channel = $channel;
@@ -1634,8 +1663,10 @@ trait ClientMethods
         $buffer->appendUint16(60);
         $buffer->appendUint16(20);
         $buffer->appendInt16(0);
-        $buffer->appendUint8(strlen($queue)); $buffer->append($queue);
-        $buffer->appendUint8(strlen($consumerTag)); $buffer->append($consumerTag);
+        $buffer->appendUint8(strlen($queue));
+        $buffer->append($queue);
+        $buffer->appendUint8(strlen($consumerTag));
+        $buffer->append($consumerTag);
         $this->getWriter()->appendBits([$noLocal, $noAck, $exclusive, $nowait], $buffer);
         $this->getWriter()->appendTable($arguments, $buffer);
         $frame = new Protocol\MethodFrame(60, 20);
@@ -1707,7 +1738,8 @@ trait ClientMethods
         $buffer->appendUint32(6 + strlen($consumerTag));
         $buffer->appendUint16(60);
         $buffer->appendUint16(30);
-        $buffer->appendUint8(strlen($consumerTag)); $buffer->append($consumerTag);
+        $buffer->appendUint8(strlen($consumerTag));
+        $buffer->append($consumerTag);
         $this->getWriter()->appendBits([$nowait], $buffer);
         $buffer->appendUint8(206);
         if ($nowait) {
@@ -1771,177 +1803,225 @@ trait ClientMethods
         $buffer = $this->getWriteBuffer();
         $ck = serialize([$channel, $headers, $exchange, $routingKey, $mandatory, $immediate]);
         $c = isset($this->cache[$ck]) ? $this->cache[$ck] : null;
-        $flags = 0; $off0 = 0; $len0 = 0; $off1 = 0; $len1 = 0; $contentTypeLength = null; $contentType = null; $contentEncodingLength = null; $contentEncoding = null; $headersBuffer = null; $deliveryMode = null; $priority = null; $correlationIdLength = null; $correlationId = null; $replyToLength = null; $replyTo = null; $expirationLength = null; $expiration = null; $messageIdLength = null; $messageId = null; $timestamp = null; $typeLength = null; $type = null; $userIdLength = null; $userId = null; $appIdLength = null; $appId = null; $clusterIdLength = null; $clusterId = null;
-        if ($c) { $buffer->append($c[0]); }
-        else {
-        $off0 = $buffer->getLength();
-        $buffer->appendUint8(1);
-        $buffer->appendUint16($channel);
-        $buffer->appendUint32(9 + strlen($exchange) + strlen($routingKey));
-        $buffer->appendUint16(60);
-        $buffer->appendUint16(40);
-        $buffer->appendInt16(0);
-        $buffer->appendUint8(strlen($exchange)); $buffer->append($exchange);
-        $buffer->appendUint8(strlen($routingKey)); $buffer->append($routingKey);
-        $this->getWriter()->appendBits([$mandatory, $immediate], $buffer);
-        $buffer->appendUint8(206);
-        $s = 14;
-        if (isset($headers['content-type'])) {
-            $flags |= 32768;
-            $contentType = $headers['content-type'];
-            $s += 1;
-            $s += $contentTypeLength = strlen($contentType);
-            unset($headers['content-type']);
-        }
-        if (isset($headers['content-encoding'])) {
-            $flags |= 16384;
-            $contentEncoding = $headers['content-encoding'];
-            $s += 1;
-            $s += $contentEncodingLength = strlen($contentEncoding);
-            unset($headers['content-encoding']);
-        }
-        if (isset($headers['delivery-mode'])) {
-            $flags |= 4096;
-            $deliveryMode = $headers['delivery-mode'];
-            $s += 1;
-            unset($headers['delivery-mode']);
-        }
-        if (isset($headers['priority'])) {
-            $flags |= 2048;
-            $priority = $headers['priority'];
-            $s += 1;
-            unset($headers['priority']);
-        }
-        if (isset($headers['correlation-id'])) {
-            $flags |= 1024;
-            $correlationId = $headers['correlation-id'];
-            $s += 1;
-            $s += $correlationIdLength = strlen($correlationId);
-            unset($headers['correlation-id']);
-        }
-        if (isset($headers['reply-to'])) {
-            $flags |= 512;
-            $replyTo = $headers['reply-to'];
-            $s += 1;
-            $s += $replyToLength = strlen($replyTo);
-            unset($headers['reply-to']);
-        }
-        if (isset($headers['expiration'])) {
-            $flags |= 256;
-            $expiration = $headers['expiration'];
-            $s += 1;
-            $s += $expirationLength = strlen($expiration);
-            unset($headers['expiration']);
-        }
-        if (isset($headers['message-id'])) {
-            $flags |= 128;
-            $messageId = $headers['message-id'];
-            $s += 1;
-            $s += $messageIdLength = strlen($messageId);
-            unset($headers['message-id']);
-        }
-        if (isset($headers['timestamp'])) {
-            $flags |= 64;
-            $timestamp = $headers['timestamp'];
-            $s += 8;
-            unset($headers['timestamp']);
-        }
-        if (isset($headers['type'])) {
-            $flags |= 32;
-            $type = $headers['type'];
-            $s += 1;
-            $s += $typeLength = strlen($type);
-            unset($headers['type']);
-        }
-        if (isset($headers['user-id'])) {
-            $flags |= 16;
-            $userId = $headers['user-id'];
-            $s += 1;
-            $s += $userIdLength = strlen($userId);
-            unset($headers['user-id']);
-        }
-        if (isset($headers['app-id'])) {
-            $flags |= 8;
-            $appId = $headers['app-id'];
-            $s += 1;
-            $s += $appIdLength = strlen($appId);
-            unset($headers['app-id']);
-        }
-        if (isset($headers['cluster-id'])) {
-            $flags |= 4;
-            $clusterId = $headers['cluster-id'];
-            $s += 1;
-            $s += $clusterIdLength = strlen($clusterId);
-            unset($headers['cluster-id']);
-        }
-        if (!empty($headers)) {
-            $flags |= 8192;
-            $this->getWriter()->appendTable($headers, $headersBuffer = new Buffer());
-            $s += $headersBuffer->getLength();
-        }
-        $buffer->appendUint8(2);
-        $buffer->appendUint16($channel);
-        $buffer->appendUint32($s);
-        $buffer->appendUint16(60);
-        $buffer->appendUint16(0);
-        $len0 = $buffer->getLength() - $off0;
+        $flags = 0;
+        $off0 = 0;
+        $len0 = 0;
+        $off1 = 0;
+        $len1 = 0;
+        $contentTypeLength = null;
+        $contentType = null;
+        $contentEncodingLength = null;
+        $contentEncoding = null;
+        $headersBuffer = null;
+        $deliveryMode = null;
+        $priority = null;
+        $correlationIdLength = null;
+        $correlationId = null;
+        $replyToLength = null;
+        $replyTo = null;
+        $expirationLength = null;
+        $expiration = null;
+        $messageIdLength = null;
+        $messageId = null;
+        $timestamp = null;
+        $typeLength = null;
+        $type = null;
+        $userIdLength = null;
+        $userId = null;
+        $appIdLength = null;
+        $appId = null;
+        $clusterIdLength = null;
+        $clusterId = null;
+        if ($c) {
+            $buffer->append($c[0]);
+        } else {
+            $off0 = $buffer->getLength();
+            $buffer->appendUint8(1);
+            $buffer->appendUint16($channel);
+            $buffer->appendUint32(9 + strlen($exchange) + strlen($routingKey));
+            $buffer->appendUint16(60);
+            $buffer->appendUint16(40);
+            $buffer->appendInt16(0);
+            $buffer->appendUint8(strlen($exchange));
+            $buffer->append($exchange);
+            $buffer->appendUint8(strlen($routingKey));
+            $buffer->append($routingKey);
+            $this->getWriter()->appendBits([$mandatory, $immediate], $buffer);
+            $buffer->appendUint8(206);
+            $s = 14;
+            if (isset($headers['content-type'])) {
+                $flags |= 32768;
+                $contentType = $headers['content-type'];
+                $s += 1;
+                $s += $contentTypeLength = strlen($contentType);
+                unset($headers['content-type']);
+            }
+            if (isset($headers['content-encoding'])) {
+                $flags |= 16384;
+                $contentEncoding = $headers['content-encoding'];
+                $s += 1;
+                $s += $contentEncodingLength = strlen($contentEncoding);
+                unset($headers['content-encoding']);
+            }
+            if (isset($headers['delivery-mode'])) {
+                $flags |= 4096;
+                $deliveryMode = $headers['delivery-mode'];
+                $s += 1;
+                unset($headers['delivery-mode']);
+            }
+            if (isset($headers['priority'])) {
+                $flags |= 2048;
+                $priority = $headers['priority'];
+                $s += 1;
+                unset($headers['priority']);
+            }
+            if (isset($headers['correlation-id'])) {
+                $flags |= 1024;
+                $correlationId = $headers['correlation-id'];
+                $s += 1;
+                $s += $correlationIdLength = strlen($correlationId);
+                unset($headers['correlation-id']);
+            }
+            if (isset($headers['reply-to'])) {
+                $flags |= 512;
+                $replyTo = $headers['reply-to'];
+                $s += 1;
+                $s += $replyToLength = strlen($replyTo);
+                unset($headers['reply-to']);
+            }
+            if (isset($headers['expiration'])) {
+                $flags |= 256;
+                $expiration = $headers['expiration'];
+                $s += 1;
+                $s += $expirationLength = strlen($expiration);
+                unset($headers['expiration']);
+            }
+            if (isset($headers['message-id'])) {
+                $flags |= 128;
+                $messageId = $headers['message-id'];
+                $s += 1;
+                $s += $messageIdLength = strlen($messageId);
+                unset($headers['message-id']);
+            }
+            if (isset($headers['timestamp'])) {
+                $flags |= 64;
+                $timestamp = $headers['timestamp'];
+                $s += 8;
+                unset($headers['timestamp']);
+            }
+            if (isset($headers['type'])) {
+                $flags |= 32;
+                $type = $headers['type'];
+                $s += 1;
+                $s += $typeLength = strlen($type);
+                unset($headers['type']);
+            }
+            if (isset($headers['user-id'])) {
+                $flags |= 16;
+                $userId = $headers['user-id'];
+                $s += 1;
+                $s += $userIdLength = strlen($userId);
+                unset($headers['user-id']);
+            }
+            if (isset($headers['app-id'])) {
+                $flags |= 8;
+                $appId = $headers['app-id'];
+                $s += 1;
+                $s += $appIdLength = strlen($appId);
+                unset($headers['app-id']);
+            }
+            if (isset($headers['cluster-id'])) {
+                $flags |= 4;
+                $clusterId = $headers['cluster-id'];
+                $s += 1;
+                $s += $clusterIdLength = strlen($clusterId);
+                unset($headers['cluster-id']);
+            }
+            if (!empty($headers)) {
+                $flags |= 8192;
+                $this->getWriter()->appendTable($headers, $headersBuffer = new Buffer());
+                $s += $headersBuffer->getLength();
+            }
+            $buffer->appendUint8(2);
+            $buffer->appendUint16($channel);
+            $buffer->appendUint32($s);
+            $buffer->appendUint16(60);
+            $buffer->appendUint16(0);
+            $len0 = $buffer->getLength() - $off0;
         }
         $buffer->appendUint64(strlen($body));
-        if ($c) { $buffer->append($c[1]); }
-        else {
-        $off1 = $buffer->getLength();
-        $buffer->appendUint16($flags);
-        if ($flags & 32768) {
-            $buffer->appendUint8($contentTypeLength); $buffer->append($contentType);
-        }
-        if ($flags & 16384) {
-            $buffer->appendUint8($contentEncodingLength); $buffer->append($contentEncoding);
-        }
-        if ($flags & 8192) {
-            $buffer->append($headersBuffer);
-        }
-        if ($flags & 4096) {
-            $buffer->appendUint8($deliveryMode);
-        }
-        if ($flags & 2048) {
-            $buffer->appendUint8($priority);
-        }
-        if ($flags & 1024) {
-            $buffer->appendUint8($correlationIdLength); $buffer->append($correlationId);
-        }
-        if ($flags & 512) {
-            $buffer->appendUint8($replyToLength); $buffer->append($replyTo);
-        }
-        if ($flags & 256) {
-            $buffer->appendUint8($expirationLength); $buffer->append($expiration);
-        }
-        if ($flags & 128) {
-            $buffer->appendUint8($messageIdLength); $buffer->append($messageId);
-        }
-        if ($flags & 64) {
-            $this->getWriter()->appendTimestamp($timestamp, $buffer);
-        }
-        if ($flags & 32) {
-            $buffer->appendUint8($typeLength); $buffer->append($type);
-        }
-        if ($flags & 16) {
-            $buffer->appendUint8($userIdLength); $buffer->append($userId);
-        }
-        if ($flags & 8) {
-            $buffer->appendUint8($appIdLength); $buffer->append($appId);
-        }
-        if ($flags & 4) {
-            $buffer->appendUint8($clusterIdLength); $buffer->append($clusterId);
-        }
-        $buffer->appendUint8(206);
-        $len1 = $buffer->getLength() - $off1;
+        if ($c) {
+            $buffer->append($c[1]);
+        } else {
+            $off1 = $buffer->getLength();
+            $buffer->appendUint16($flags);
+            if ($flags & 32768) {
+                $buffer->appendUint8($contentTypeLength);
+                $buffer->append($contentType);
+            }
+            if ($flags & 16384) {
+                $buffer->appendUint8($contentEncodingLength);
+                $buffer->append($contentEncoding);
+            }
+            if ($flags & 8192) {
+                $buffer->append($headersBuffer);
+            }
+            if ($flags & 4096) {
+                $buffer->appendUint8($deliveryMode);
+            }
+            if ($flags & 2048) {
+                $buffer->appendUint8($priority);
+            }
+            if ($flags & 1024) {
+                $buffer->appendUint8($correlationIdLength);
+                $buffer->append($correlationId);
+            }
+            if ($flags & 512) {
+                $buffer->appendUint8($replyToLength);
+                $buffer->append($replyTo);
+            }
+            if ($flags & 256) {
+                $buffer->appendUint8($expirationLength);
+                $buffer->append($expiration);
+            }
+            if ($flags & 128) {
+                $buffer->appendUint8($messageIdLength);
+                $buffer->append($messageId);
+            }
+            if ($flags & 64) {
+                $this->getWriter()->appendTimestamp($timestamp, $buffer);
+            }
+            if ($flags & 32) {
+                $buffer->appendUint8($typeLength);
+                $buffer->append($type);
+            }
+            if ($flags & 16) {
+                $buffer->appendUint8($userIdLength);
+                $buffer->append($userId);
+            }
+            if ($flags & 8) {
+                $buffer->appendUint8($appIdLength);
+                $buffer->append($appId);
+            }
+            if ($flags & 4) {
+                $buffer->appendUint8($clusterIdLength);
+                $buffer->append($clusterId);
+            }
+            $buffer->appendUint8(206);
+            $len1 = $buffer->getLength() - $off1;
         }
         if (!$c) {
             $this->cache[$ck] = [$buffer->read($len0, $off0), $buffer->read($len1, $off1)];
-            if (count($this->cache) > 100) { reset($this->cache); unset($this->cache[key($this->cache)]); }
+            if (count($this->cache) > 100) {
+                reset($this->cache);
+                unset($this->cache[key($this->cache)]);
+            }
         }
         for ($payloadMax = $this->getFrameMax() - 8 /* frame preface and frame end */, $i = 0, $l = strlen($body); $i < $l; $i += $payloadMax) {
-            $payloadSize = $l - $i; if ($payloadSize > $payloadMax) { $payloadSize = $payloadMax; }
+            $payloadSize = $l - $i;
+            if ($payloadSize > $payloadMax) {
+                $payloadSize = $payloadMax;
+            }
             $buffer->appendUint8(3);
             $buffer->appendUint16($channel);
             $buffer->appendUint32($payloadSize);
@@ -2056,7 +2136,8 @@ trait ClientMethods
         $buffer->appendUint16(60);
         $buffer->appendUint16(70);
         $buffer->appendInt16(0);
-        $buffer->appendUint8(strlen($queue)); $buffer->append($queue);
+        $buffer->appendUint8(strlen($queue));
+        $buffer->append($queue);
         $this->getWriter()->appendBits([$noAck], $buffer);
         $buffer->appendUint8(206);
         $this->flushWriteBuffer();
@@ -2577,5 +2658,4 @@ trait ClientMethods
         }
         throw new \LogicException('This statement should be never reached.');
     }
-
 }

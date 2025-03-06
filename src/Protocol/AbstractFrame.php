@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny\Protocol;
 
 /**
@@ -47,5 +48,4 @@ abstract class AbstractFrame
         $this->payloadSize = $payloadSize;
         $this->payload = $payload;
     }
-
 }

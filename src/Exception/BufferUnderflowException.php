@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny\Exception;
 
 /**
@@ -8,6 +9,4 @@ namespace RPurinton\Bunny\Exception;
  *
  * @author Jakub Kulhan <jakub.kulhan@gmail.com>
  */
-class BufferUnderflowException extends BunnyException
-{
-}
+class BufferUnderflowException extends BunnyException {}

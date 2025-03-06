@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny\Protocol;
 
 use RPurinton\Bunny\Constants;
@@ -275,5 +276,4 @@ class ContentHeaderFrame extends AbstractFrame
 
         return $headers;
     }
-
 }

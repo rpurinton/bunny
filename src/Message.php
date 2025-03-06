@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny;
 
 /**
@@ -78,5 +79,4 @@ class Message
     {
         return isset($this->headers[$name]);
     }
-
 }

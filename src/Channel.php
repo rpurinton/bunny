@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny;
 
 use RPurinton\Bunny\Exception\ChannelException;
@@ -255,18 +256,16 @@ class Channel
         if ($response instanceof MethodBasicConsumeOkFrame) {
             $this->deliverCallbacks[$response->consumerTag] = $callback;
             return $response;
-
         } elseif ($response instanceof PromiseInterface) {
             return $response->then(function (MethodBasicConsumeOkFrame $response) use ($callback) {
                 $this->deliverCallbacks[$response->consumerTag] = $callback;
                 return $response;
             });
-
         } else {
             throw new ChannelException(
                 "basic.consume unexpected response of type " . gettype($response) .
-                (is_object($response) ? " (" . get_class($response) . ")" : "") .
-                "."
+                    (is_object($response) ? " (" . get_class($response) . ")" : "") .
+                    "."
             );
         }
     }
@@ -289,17 +288,15 @@ class Channel
 
         if ($response instanceof MethodBasicConsumeOkFrame) {
             $this->client->run();
-
         } elseif ($response instanceof PromiseInterface) {
             $response->then(function () {
                 $this->client->run();
             });
-
         } else {
             throw new ChannelException(
                 "Unexpected response of type " . gettype($response) .
-                (is_object($response) ? " (" . get_class($response) . ")" : "") .
-                "."
+                    (is_object($response) ? " (" . get_class($response) . ")" : "") .
+                    "."
             );
         }
     }
@@ -365,21 +362,17 @@ class Channel
                     $deferred = $this->getDeferred;
                     $this->getDeferred = null;
                     $deferred->resolve(null);
-
                 } elseif ($frame instanceof MethodBasicGetOkFrame) {
                     $this->getOkFrame = $frame;
                     $this->state = ChannelStateEnum::AWAITING_HEADER;
-
                 } else {
                     throw new \LogicException("This statement should never be reached.");
                 }
             });
 
             return $this->getDeferred->promise();
-
         } elseif ($response instanceof MethodBasicGetEmptyFrame) {
             return null;
-
         } elseif ($response instanceof MethodBasicGetOkFrame) {
             $this->state = ChannelStateEnum::AWAITING_HEADER;
 
@@ -416,7 +409,6 @@ class Channel
             $this->headerFrame = null;
 
             return $message;
-
         } else {
             throw new \LogicException("This statement should never be reached.");
         }
@@ -482,7 +474,6 @@ class Channel
                 $this->mode = ChannelModeEnum::TRANSACTIONAL;
                 return $response;
             });
-
         } else {
             $this->mode = ChannelModeEnum::TRANSACTIONAL;
             return $response;
@@ -536,7 +527,6 @@ class Channel
                 $this->enterConfirmMode($callback);
                 return $response;
             });
-
         } else {
             $this->enterConfirmMode($callback);
             return $response;
@@ -572,7 +562,6 @@ class Channel
             if ($this->state === ChannelStateEnum::CLOSING && !($frame instanceof MethodChannelCloseOkFrame)) {
                 // drop frames in closing state
                 return;
-
             } elseif ($this->state !== ChannelStateEnum::READY && !($frame instanceof MethodChannelCloseOkFrame)) {
                 $currentState = $this->state;
                 $this->state = ChannelStateEnum::ERROR;
@@ -601,36 +590,29 @@ class Channel
                 $this->client = null;
                 // break consumers' reference cycle
                 $this->deliverCallbacks = [];
-
             } elseif ($frame instanceof MethodBasicReturnFrame) {
                 $this->returnFrame = $frame;
                 $this->state = ChannelStateEnum::AWAITING_HEADER;
-
             } elseif ($frame instanceof MethodBasicDeliverFrame) {
                 $this->deliverFrame = $frame;
                 $this->state = ChannelStateEnum::AWAITING_HEADER;
-
             } elseif ($frame instanceof MethodBasicAckFrame) {
                 foreach ($this->ackCallbacks as $callback) {
                     $callback($frame);
                 }
-
             } elseif ($frame instanceof MethodBasicNackFrame) {
                 foreach ($this->ackCallbacks as $callback) {
                     $callback($frame);
                 }
             } elseif ($frame instanceof MethodChannelCloseFrame) {
                 throw new ChannelException("Channel closed by server: " . $frame->replyText, $frame->replyCode);
-
             } else {
                 throw new ChannelException("Unhandled method frame " . get_class($frame) . ".");
             }
-
         } elseif ($frame instanceof ContentHeaderFrame) {
             if ($this->state === ChannelStateEnum::CLOSING) {
                 // drop frames in closing state
                 return;
-
             } elseif ($this->state !== ChannelStateEnum::AWAITING_HEADER) {
                 $currentState = $this->state;
                 $this->state = ChannelStateEnum::ERROR;
@@ -657,12 +639,10 @@ class Channel
                 $this->state = ChannelStateEnum::READY;
                 $this->onBodyComplete();
             }
-
         } elseif ($frame instanceof ContentBodyFrame) {
             if ($this->state === ChannelStateEnum::CLOSING) {
                 // drop frames in closing state
                 return;
-
             } elseif ($this->state !== ChannelStateEnum::AWAITING_BODY) {
                 $currentState = $this->state;
                 $this->state = ChannelStateEnum::ERROR;
@@ -686,16 +666,13 @@ class Channel
             if ($this->bodySizeRemaining < 0) {
                 $this->state = ChannelStateEnum::ERROR;
                 $this->client->disconnect(Constants::STATUS_SYNTAX_ERROR, "Body overflow, received " . (-$this->bodySizeRemaining) . " more bytes.");
-
             } elseif ($this->bodySizeRemaining === 0) {
                 $this->state = ChannelStateEnum::READY;
                 $this->onBodyComplete();
             }
-
         } elseif ($frame instanceof HeartbeatFrame) {
             $this->client->disconnect(Constants::STATUS_UNEXPECTED_FRAME, "Got heartbeat on non-zero channel.");
             throw new ChannelException("Unexpected heartbeat frame.");
-
         } else {
             throw new ChannelException("Unhandled frame " . get_class($frame) . ".");
         }
@@ -724,7 +701,6 @@ class Channel
 
             $this->returnFrame = null;
             $this->headerFrame = null;
-
         } elseif ($this->deliverFrame) {
             $content = $this->bodyBuffer->consume($this->bodyBuffer->getLength());
             if (isset($this->deliverCallbacks[$this->deliverFrame->consumerTag])) {
@@ -745,7 +721,6 @@ class Channel
 
             $this->deliverFrame = null;
             $this->headerFrame = null;
-
         } elseif ($this->getOkFrame) {
             $content = $this->bodyBuffer->consume($this->bodyBuffer->getLength());
 
@@ -764,10 +739,8 @@ class Channel
 
             $this->getOkFrame = null;
             $this->headerFrame = null;
-
         } else {
             throw new \LogicException("Either return or deliver frame has to be handled here.");
         }
     }
 }
-

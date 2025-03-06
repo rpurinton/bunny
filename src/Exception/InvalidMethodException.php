@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny\Exception;
 
 /**
@@ -37,5 +38,4 @@ class InvalidMethodException extends ProtocolException
     {
         return $this->methodId;
     }
-
 }

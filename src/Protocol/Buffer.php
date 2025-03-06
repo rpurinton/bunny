@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny\Protocol;
 
 use RPurinton\Bunny\Exception\BufferUnderflowException;
@@ -138,10 +139,8 @@ class Buffer
     {
         if ($this->length < $offset + $n) {
             throw new BufferUnderflowException();
-
         } elseif ($offset === 0 && $this->length === $offset + $n) {
             return $this->buffer;
-
         } else {
             return substr($this->buffer, $offset, $n);
         }
@@ -157,13 +156,11 @@ class Buffer
     {
         if ($this->length < $n) {
             throw new BufferUnderflowException();
-
         } elseif ($this->length === $n) {
             $buffer = $this->buffer;
             $this->buffer = "";
             $this->length = 0;
             return $buffer;
-
         } else {
             $buffer = substr($this->buffer, 0, $n);
             $this->buffer = substr($this->buffer, $n);
@@ -182,12 +179,10 @@ class Buffer
     {
         if ($this->length < $n) {
             throw new BufferUnderflowException();
-
         } elseif ($this->length === $n) {
             $this->buffer = "";
             $this->length = 0;
             return $this;
-
         } else {
             $this->buffer = substr($this->buffer, $n);
             $this->length -= $n;
@@ -205,10 +200,8 @@ class Buffer
     {
         if ($this->length < $n) {
             throw new BufferUnderflowException();
-
         } elseif ($this->length === $n) {
             return new Buffer($this->buffer);
-
         } else {
             return new Buffer(substr($this->buffer, 0, $n));
         }
@@ -224,13 +217,11 @@ class Buffer
     {
         if ($this->length < $n) {
             throw new BufferUnderflowException();
-
         } elseif ($this->length === $n) {
             $buffer = $this->buffer;
             $this->buffer = "";
             $this->length = 0;
             return new Buffer($buffer);
-
         } else {
             $buffer = substr($this->buffer, 0, $n);
             $this->buffer = substr($this->buffer, $n);
@@ -661,5 +652,4 @@ class Buffer
         $s = pack("d", $value);
         return $this->append(self::$isLittleEndian ? self::swapEndian64($s) : $s);
     }
-
 }

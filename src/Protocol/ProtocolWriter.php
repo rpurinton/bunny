@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny\Protocol;
 
 use RPurinton\Bunny\Constants;
@@ -33,7 +34,6 @@ class ProtocolWriter
             $this->appendMethodFrame($frame, $frameBuffer);
             $frame->payloadSize = $frameBuffer->getLength();
             $frame->payload = $frameBuffer;
-
         } elseif ($frame instanceof ContentHeaderFrame) {
             $frameBuffer = new Buffer();
             // see https://github.com/pika/pika/blob/master/pika/spec.py class BasicProperties
@@ -113,7 +113,6 @@ class ProtocolWriter
 
             $frame->payloadSize = $frameBuffer->getLength();
             $frame->payload = $frameBuffer;
-
         } elseif ($frame instanceof ContentBodyFrame) {
             // body frame's payload is already loaded
 
@@ -208,19 +207,15 @@ class ProtocolWriter
             $buffer->appendUint8(Constants::FIELD_LONG_STRING);
             $buffer->appendUint32(strlen($value));
             $buffer->append($value);
-
         } elseif (is_int($value)) {
             $buffer->appendUint8(Constants::FIELD_LONG_INT);
             $buffer->appendInt32($value);
-
         } elseif (is_bool($value)) {
             $buffer->appendUint8(Constants::FIELD_BOOLEAN);
             $buffer->appendUint8(intval($value));
-
         } elseif (is_float($value)) {
             $buffer->appendUint8(Constants::FIELD_DOUBLE);
             $buffer->appendDouble($value);
-
         } elseif (is_array($value)) {
             if (array_keys($value) === range(0, count($value) - 1)) { // sequential array
                 $buffer->appendUint8(Constants::FIELD_ARRAY);
@@ -229,21 +224,17 @@ class ProtocolWriter
                 $buffer->appendUint8(Constants::FIELD_TABLE);
                 $this->appendTable($value, $buffer);
             }
-
         } elseif (is_null($value)) {
             $buffer->appendUint8(Constants::FIELD_NULL);
-
         } elseif ($value instanceof \DateTimeInterface) {
             $buffer->appendUint8(Constants::FIELD_TIMESTAMP);
             $this->appendTimestamp($value, $buffer);
-
         } else {
             throw new ProtocolException(
                 "Unhandled value type '" . gettype($value) . "' " .
-                (is_object($value) ? "(class " . get_class($value) . ")" : "") .
-                "."
+                    (is_object($value) ? "(class " . get_class($value) . ")" : "") .
+                    "."
             );
         }
     }
-
 }

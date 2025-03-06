@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny;
 
 use RPurinton\Bunny\Protocol;
@@ -353,5 +354,4 @@ trait ChannelMethods
     {
         return $this->getClient()->confirmSelect($this->getChannelId(), $nowait);
     }
-
 }

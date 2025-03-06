@@ -4,5 +4,5 @@
     "user": "bunnytest",
     "password": "bunnytest",
     "vhost": "bunnytest",
-    "heartbeat": 45
+    "heartbeat": 60
 }

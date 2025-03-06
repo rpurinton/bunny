@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny\Async;
 
 use RPurinton\Bunny\AbstractClient;
@@ -148,7 +149,6 @@ class Client extends AbstractClient
     {
         if ($this->flushWriteBufferPromise) {
             return $this->flushWriteBufferPromise;
-
         } else {
             $deferred = new Promise\Deferred();
 
@@ -161,7 +161,6 @@ class Client extends AbstractClient
                         $this->flushWriteBufferPromise = null;
                         $deferred->resolve(true);
                     }
-
                 } catch (\Exception $e) {
                     $this->eventLoop->removeWriteStream($stream);
                     $this->flushWriteBufferPromise = null;
@@ -197,29 +196,23 @@ class Client extends AbstractClient
 
         return $this->flushWriteBuffer()->then(function () {
             return $this->awaitConnectionStart();
-
         })->then(function (MethodConnectionStartFrame $start) {
             return $this->authResponse($start);
-
         })->then(function () {
             return $this->awaitConnectionTune();
-
         })->then(function (MethodConnectionTuneFrame $tune) {
             $this->frameMax = $tune->frameMax;
             if ($tune->channelMax > 0) {
                 $this->channelMax = $tune->channelMax;
             }
             return $this->connectionTuneOk($tune->channelMax, $tune->frameMax, $this->options["heartbeat"]);
-
         })->then(function () {
             return $this->connectionOpen($this->options["vhost"]);
-
         })->then(function () {
             $this->heartbeatTimer = $this->eventLoop->addTimer($this->options["heartbeat"], [$this, "onHeartbeat"]);
 
             $this->state = ClientStateEnum::CONNECTED;
             return $this;
-
         });
     }
 
@@ -251,9 +244,8 @@ class Client extends AbstractClient
             foreach ($this->channels as $channel) {
                 $promises[] = $channel->close($replyCode, $replyText);
             }
-        }
-        else{
-            foreach($this->channels as $channel){
+        } else {
+            foreach ($this->channels as $channel) {
                 $this->removeChannel($channel->getChannelId());
             }
         }
@@ -267,7 +259,7 @@ class Client extends AbstractClient
             if (!empty($this->channels)) {
                 throw new \LogicException("All channels have to be closed by now.");
             }
-            if($replyCode !== 0){
+            if ($replyCode !== 0) {
                 return null;
             }
             return $this->connectionClose($replyCode, $replyText, 0, 0);
@@ -318,7 +310,6 @@ class Client extends AbstractClient
 
             if ($frame->channel === 0) {
                 $this->onFrameReceived($frame);
-
             } else {
                 if (!isset($this->channels[$frame->channel])) {
                     throw new ClientException(
@@ -352,5 +343,4 @@ class Client extends AbstractClient
             $this->heartbeatTimer = $this->eventLoop->addTimer($nextHeartbeat - $now, [$this, "onHeartbeat"]);
         }
     }
-
 }

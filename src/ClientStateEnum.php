@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny;
 
 /**
@@ -33,5 +34,4 @@ final class ClientStateEnum
      * An error has occurred.
      */
     const ERROR = 4;
-
 }

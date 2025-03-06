@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny\Protocol;
 
 use RPurinton\Bunny\Constants;
@@ -23,5 +24,4 @@ class MethodBasicRejectFrame extends MethodFrame
     {
         parent::__construct(Constants::CLASS_BASIC, Constants::METHOD_BASIC_REJECT);
     }
-
 }

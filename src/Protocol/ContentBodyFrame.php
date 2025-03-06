@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny\Protocol;
 
 use RPurinton\Bunny\Constants;
@@ -20,5 +21,4 @@ class ContentBodyFrame extends AbstractFrame
     {
         parent::__construct(Constants::FRAME_BODY, $channel, $payloadSize, $payload);
     }
-
 }

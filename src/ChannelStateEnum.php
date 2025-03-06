@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny;
 
 /**
@@ -38,5 +39,4 @@ final class ChannelStateEnum
      * Channel has received channel.close-ok frame.
      */
     const CLOSED = 6;
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny\Protocol;
 
 use RPurinton\Bunny\Constants;
@@ -54,7 +55,6 @@ class ProtocolReader
 
         if ($type === Constants::FRAME_METHOD) {
             $frame = $this->consumeMethodFrame($frameBuffer);
-
         } elseif ($type === Constants::FRAME_HEADER) {
             // see https://github.com/pika/pika/blob/master/pika/spec.py class BasicProperties
             $frame = new ContentHeaderFrame();
@@ -118,17 +118,14 @@ class ProtocolReader
             if ($flags & ContentHeaderFrame::FLAG_CLUSTER_ID) {
                 $frame->clusterId = $frameBuffer->consume($frameBuffer->consumeUint8());
             }
-
         } elseif ($type === Constants::FRAME_BODY) {
             $frame = new ContentBodyFrame();
             $frame->payload = $frameBuffer->consume($frameBuffer->getLength());
-
         } elseif ($type === Constants::FRAME_HEARTBEAT) {
             $frame = new HeartbeatFrame();
             if (!$frameBuffer->isEmpty()) {
                 throw new ProtocolException("Heartbeat frame must be empty.");
             }
-
         } else {
             throw new ProtocolException("Unhandled frame type '{$type}'.");
         }
@@ -275,10 +272,9 @@ class ProtocolReader
             default:
                 throw new ProtocolException(
                     sprintf("Unhandled field type 0x%02x", $fieldType) .
-                    (ctype_print(chr($fieldType)) ? " ('" . chr($fieldType) . "')" : "") .
-                    "."
+                        (ctype_print(chr($fieldType)) ? " ('" . chr($fieldType) . "')" : "") .
+                        "."
                 );
         }
     }
-
 }

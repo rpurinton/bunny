@@ -1,4 +1,5 @@
 <?php
+
 namespace RPurinton\Bunny\Protocol;
 
 use RPurinton\Bunny\Constants;
@@ -27,5 +28,4 @@ class MethodConnectionTuneFrame extends MethodFrame
         parent::__construct(Constants::CLASS_CONNECTION, Constants::METHOD_CONNECTION_TUNE);
         $this->channel = Constants::CONNECTION_CHANNEL;
     }
-
 }
