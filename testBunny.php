@@ -10,7 +10,7 @@ use RPurinton\Bunny\Async\Client as AsyncClient;
 use React\EventLoop\Loop;
 use \Exception;
 
-$config = Config::get("bunnytest", [
+$config = Config::get("Bunny", [
     "host"      => "string",
     "vhost"     => "string",
     "user"      => "string",
